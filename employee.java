@@ -1,6 +1,8 @@
 package bank;
 
-public class employee {
+import java.io.Serializable;
+
+public class employee implements Serializable{
 
 	private String name;
 	private int age;

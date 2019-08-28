@@ -1,7 +1,13 @@
 package bank;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class run extends Thread{
+public class run extends Thread implements Serializable{
 
 	public static void main(String[] args) {
 		
@@ -170,6 +176,30 @@ public class run extends Thread{
 			}
 		}
 	*/	
+	
+		
+	//serialization
+	try {
+		//write the Object
+		FileOutputStream fos=new FileOutputStream("employee.txt");
+		ObjectOutputStream out=new ObjectOutputStream(fos);
+		out.writeObject(e1);
+		out.flush();
+		out.close();
+		
+		//read the Object
+		FileInputStream fis=new FileInputStream("employee.txt");
+		ObjectInputStream oin=new ObjectInputStream(fis);
+		employee sample=(employee)oin.readObject();
+		System.out.println("Username: "+sample.getName()+" Age: "+sample.getAge()+" Salary: "+sample.getSalary());
+	}catch(IOException e) {
+		e.printStackTrace();
+	}catch(ClassNotFoundException e) {
+		e.printStackTrace();
+	}
+	
+	
+	
 	}
 }
 
