@@ -56,6 +56,12 @@ public class run extends Thread{
 				System.out.println("You chose 1 deposit");
 				System.out.println("add $4000");
 				Thread depositthread=new AccountUser(account1,4000,credit);
+				depositthread.start();
+				try {
+					depositthread.join();
+				}catch(InterruptedException e) {
+					e.printStackTrace();
+				}
 				System.out.println("Now balance is: "+account1.getBalance());
 				break;
 			case(2):
@@ -70,23 +76,20 @@ public class run extends Thread{
 		}
 		if(exit==1) {
 			System.out.println("Byebye");
+			System.out.println("Balance is: "+account1.getBalance());
 		}
 		
 		//add 4000
-		//Thread depositthread=new AccountUser(account1,4000,credit);
+		Thread depositthread=new AccountUser(account1,4000,credit);
 		//take 12000
 		//Thread withdrawthread=new AccountUser(account1,12000,debit);
 		
 		//depositthread.start();
-		withdrawthread.start();
-		
-		try {
-			//depositthread.join();
-			withdrawthread.join();
-		}catch(InterruptedException e) {
-			e.printStackTrace();
-		}
-		
+		//withdrawthread.start();
+		/*
+		 * try { depositthread.join(); withdrawthread.join();
+		 * }catch(InterruptedException e) { e.printStackTrace(); }
+		 */
 		//created object of employee
 /*
 		employee e1=new employee();
