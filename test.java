@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
 
-
+/*
 class Office implements Serializable{
 	int id;
 	String name;
@@ -61,3 +61,4 @@ public class test {
 	}
 
 }
+*/

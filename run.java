@@ -14,7 +14,7 @@ public class run extends Thread implements Serializable{
 		int type=0,decision=0;
 		int depositMoney;
 		
-		/*
+		
 		employee e1=new employee();
 		
 		System.out.println("What is your name?");
@@ -30,14 +30,16 @@ public class run extends Thread implements Serializable{
 		e1.setSalary(inputSalary.nextDouble());
 		
 		//output the user info
+		String str=e1.getName();
 		System.out.println("Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary());
-		
+		/*
 		System.out.println("What kind of bank account would you open?");
 		System.out.println("1 for SavingAccount,2 for SalaryAccount,3 for CurrentAccount:");
 		Scanner inputChoice=new Scanner(System.in);
 		choice=inputChoice.nextInt();
 		 */
 		//Personal info
+		/*
 		String name="Moshi";
 		int age=22;
 		int salary=5000;
@@ -45,6 +47,7 @@ public class run extends Thread implements Serializable{
 		e1.setName(name);
 		e1.setAge(age);
 		e1.setSalary(salary);
+		*/
 		//print info
 		System.out.println("Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary());
 		
@@ -63,6 +66,8 @@ public class run extends Thread implements Serializable{
 		//initial balance is 60000
 		depositMoney=60000;
 		account1.setBalance(depositMoney);
+		double a=account1.getBalance();
+		e1.setBalance(a);
 		System.out.println("Balance now is: "+account1.getBalance());
 		
 		
@@ -183,18 +188,24 @@ public class run extends Thread implements Serializable{
 		//write the Object
 		FileOutputStream fos=new FileOutputStream("employee.txt");
 		ObjectOutputStream out=new ObjectOutputStream(fos);
-		out.writeObject(e1);
+		String str1="Name:"+e1.getName()+"Age: "+e1.getAge()+"Salary: "+e1.getSalary()+"Balance: "+e1.getBalance();
+		out.writeObject(str1);
+		
+		//FileInputStream fis=new FileInputStream("employee.txt");
+//		ObjectInputStream oin=new ObjectInputStream(fis);
+		
+		//employee sample=(employee)oin.readObject();
+		
+		//String str="Username: "+sample.getName()+" Age: "+sample.getAge()+" Salary: "+sample.getSalary();
+		
+		out.writeObject(str);
 		out.flush();
 		out.close();
 		
 		//read the Object
-		FileInputStream fis=new FileInputStream("employee.txt");
-		ObjectInputStream oin=new ObjectInputStream(fis);
-		employee sample=(employee)oin.readObject();
-		System.out.println("Username: "+sample.getName()+" Age: "+sample.getAge()+" Salary: "+sample.getSalary());
+		
+		//System.out.println(str);
 	}catch(IOException e) {
-		e.printStackTrace();
-	}catch(ClassNotFoundException e) {
 		e.printStackTrace();
 	}
 	

@@ -7,6 +7,7 @@ public class employee implements Serializable{
 	private String name;
 	private int age;
 	private double salary;
+	private double balance;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -36,4 +37,14 @@ public class employee implements Serializable{
 	public double getSalary() {
 		return salary;
 	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
+	
 }
