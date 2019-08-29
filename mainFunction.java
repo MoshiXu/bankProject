@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class mainFunction extends Thread implements Serializable{
@@ -115,34 +117,45 @@ public class mainFunction extends Thread implements Serializable{
 			}
 		}
 		
-		//ArrayList
+		//input Object into ArrayList
+		ArrayList<String>str1=new ArrayList<>();
+		//str1.add(new employee(e.getName()) ;
 		
+		//serialization
 		try {
+			//write object into file
+			FileOutputStream fos=new FileOutputStream("output.txt");
+			ObjectOutputStream out=new ObjectOutputStream(fos);
+			String str2="Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary()+" Balance: "+e1.getBalance();
+		
+			out.writeObject(str2);
+			out.flush();
+			out.close();
+			
+			//read the object from file
+			FileInputStream fin=new FileInputStream("output.txt");
+			ObjectInputStream oin=new ObjectInputStream(fin);
+			String s1=(String)oin.readObject();
+			System.out.println(s1);
 			
 		}catch(IOException e) {
 			e.printStackTrace();
-		}finally {
-			System.out.println();
-		}
-		
-		
-		
-		/*
-		//serialization
-		try {
-			FileOutputStream fos=new FileOutputStream("output.txt");
-			ObjectOutputStream out=new ObjectOutputStream(fos);
-			String str1="Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary()+" Balance: "+e1.getBalance();
-		
-			out.writeObject(str1);
-			out.flush();
-			out.close();
-		
-			//what I inputed
-			System.out.println(str1);
-		}catch(IOException e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		*/
+		
+		//connect to JDBC
+/*
+		try {
+			//
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+*/
+		
+		
 	}
 }
