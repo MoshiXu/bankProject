@@ -1,6 +1,6 @@
 package bank;
 
-public class salaryAccount {
+public class salaryAccount implements Account{
 
 	private double balance;
 	
@@ -17,18 +17,36 @@ public class salaryAccount {
 		}
 	}
 	
-	public double withdraw(double amount) {
-		balance=balance-amount;
-		return balance;
+	public synchronized void withdraw(double amount) {
+		double temp;
+		int flag=1;
+		while(flag!=0) {
+			temp=balance;
+			//minimum is 5000
+			if(temp-amount>=5000) {
+				temp=temp-amount;
+				balance=temp;
+				flag=0;
+			}else {
+				try {
+					System.out.println("Insufficient"+Thread.currentThread().getName());
+					wait();
+				}catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Balance now is: "+balance);
+		}
 	}
 	
-	public double deposit(double amount) {
+	public synchronized void deposit(double amount) {
 		balance=balance+amount;
-		return balance;
+		System.out.println("Deposit Done"+Thread.currentThread().getName());
+		System.out.println("Balance after Deposit "+balance);
+		this.notify();
 	}
 	
-	public double transfer(double amount) {
+	public void transfer(double amount) {
 		balance=balance-amount;
-		return balance;
 	}
 }

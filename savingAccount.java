@@ -36,19 +36,17 @@ public class savingAccount implements Account{
 				}
 			}
 			System.out.println("Balance now is: "+balance);
-		}
-		
+		}	
 	}
 	
 	public synchronized void deposit(double amount) {
 		balance=balance+amount;
-		System.out.println("Deposite Done"+Thread.currentThread().getName());
-		System.out.println("Balance after Deposite"+balance);
+		System.out.println("Deposit Done"+Thread.currentThread().getName());
+		System.out.println("Balance after Deposit"+balance);
 		this.notify();
 	}
 	
 	public void transfer(double amount) {
 		balance=amount+balance;
-		//return balance;
 	}	
 }
