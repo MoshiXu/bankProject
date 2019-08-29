@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class run extends Thread implements Serializable{
+public class mainFunction extends Thread implements Serializable{
 	public static void main(String[] args) {
 		
 		boolean credit=true;
@@ -115,9 +115,21 @@ public class run extends Thread implements Serializable{
 			}
 		}
 		
+		//ArrayList
+		
+		try {
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}finally {
+			System.out.println();
+		}
+		
+		
+		
+		/*
 		//serialization
 		try {
-			//write the Object
 			FileOutputStream fos=new FileOutputStream("output.txt");
 			ObjectOutputStream out=new ObjectOutputStream(fos);
 			String str1="Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary()+" Balance: "+e1.getBalance();
@@ -131,5 +143,6 @@ public class run extends Thread implements Serializable{
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 }
