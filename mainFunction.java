@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -145,16 +149,38 @@ public class mainFunction extends Thread implements Serializable{
 		}
 		
 		//connect to JDBC
-/*
 		try {
-			//
+
+			DriverManager.registerDriver(new org.sqlite.JDBC());
 			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","XDB","xuer37xdd5");
+			System.out.println("Starting to write to DB...");
+			
+			Statement st=con.createStatement();
+			
+			con.setAutoCommit(false);
+			
+			String query="insert into employee values (?,?,?,?,?)";
+			
+			PreparedStatement prst=con.prepareStatement(query);
+			
+			prst.setInt(1, 1000);//ID
+			prst.setString(2, e1.getName());//name
+			prst.setInt(3,(int)e1.getAge());//age
+			prst.setInt(4,(int)e1.getSalary());//salary
+			prst.setInt(5, (int)e1.getBalance());//balance
+			prst.execute();  
+			
+			con.commit();
+			con.close();
+			System.out.println("Done!");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-*/
+
 		
 		
 	}

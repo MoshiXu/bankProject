@@ -14,30 +14,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/*
-create table in oracle sql developer
-run the code in mainClass
-*/
-
 
 public class test{
 
 	public static void main(String[] args){
 		
 		try {
+			
+			DriverManager.registerDriver(new org.sqlite.JDBC());
+			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","XDB","xuer37xdd5");
-			System.out.println("Connect done");
+			System.out.println("Start...");
 			
 			Statement st=con.createStatement();
 			
 			con.setAutoCommit(false);
 			
-			String query1="update salespeople set comm=? where snum=?";
-			String query2="insert into salespeople values (?,?,?,?) ";
+			String query="insert into employee values (?,?,?,?,?)";
+			//String query="select * from employee";
+			
+			//String query1="update salespeople set comm=? where snum=?";
+			//String query2="insert into salespeople values (?,?,?,?) ";
 			//String query3="delete from salespeople where snum=?";
 			
-			PreparedStatement prst2=con.prepareStatement(query2);
+			PreparedStatement prst=con.prepareStatement(query);
 			//PreparedStatement prst3=con.prepareStatement(query3);
 			
 			/*ResultSet rs=st.executeQuery("select * from salespeople");
@@ -55,10 +56,21 @@ public class test{
 			
 			//add column
 			
-			prst2.setInt(1, 1000);
-			prst2.setString(2, "Tom");
-			prst2.setString(3,"Chicago");
-			prst2.setInt(4,10000);
+/*
+create table employee(
+  ID int,
+  name varchar(10),
+  age int,
+  salary int,
+  balance int
+);*/
+			
+			prst.setInt(1, 1000);//ID
+			prst.setString(2, "Adam");//name
+			prst.setInt(3,34);//age
+			prst.setInt(4,10000);//salary
+			prst.setInt(5, 3000);//balance
+			prst.execute();
 			//prst2.addBatch();
 			//prst2.executeUpdate();
 			
@@ -68,10 +80,17 @@ public class test{
 			//prst3.executeUpdate();
 			
 			con.commit();
+		/*	
+			int m = st.executeUpdate(query); 
+            if (m == 1) { 
+                System.out.println("inserted successfully : "); 
+            }else {
+                System.out.println("insertion failed"); 
+            }
+         */
 			con.close();
 			
-			System.out.println("Record updated");
-			
+			System.out.println("Done!");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}catch(ClassNotFoundException e) {
