@@ -46,14 +46,17 @@ public class mainFunction extends Thread implements Serializable{
 		case(1):
 			//saving account
 			account1=new savingAccount();
+			System.out.println("SavingAccount created");
 			break;
 		case(2):
 			//salary account
 			account1=new salaryAccount();
+			System.out.println("SalaryAccount created");
 			break;
 		case(3):
 			//currentAccount
 			account1=new currentAccount();
+			System.out.println("CurrentAccount created");
 			break;
 		default:
 			System.out.println("Invalid number");
@@ -121,16 +124,15 @@ public class mainFunction extends Thread implements Serializable{
 			}
 		}
 		
-		//input Object into ArrayList
-		ArrayList<String>str1=new ArrayList<>();
-		//str1.add(new employee(e.getName()) ;
+		//info to record
+		String str2="Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary()+" Balance: "+e1.getBalance();
+
 		
 		//serialization
 		try {
 			//write object into file
 			FileOutputStream fos=new FileOutputStream("output.txt");
 			ObjectOutputStream out=new ObjectOutputStream(fos);
-			String str2="Name: "+e1.getName()+" Age: "+e1.getAge()+" Salary: "+e1.getSalary()+" Balance: "+e1.getBalance();
 		
 			out.writeObject(str2);
 			out.flush();
@@ -161,15 +163,15 @@ public class mainFunction extends Thread implements Serializable{
 			
 			con.setAutoCommit(false);
 			
-			String query="insert into employee values (?,?,?,?,?)";
+			String query="insert into employee values (semployee.nextval,?,?,?,?)";
 			
 			PreparedStatement prst=con.prepareStatement(query);
 			
-			prst.setInt(1, 1000);//ID
-			prst.setString(2, e1.getName());//name
-			prst.setInt(3,(int)e1.getAge());//age
-			prst.setInt(4,(int)e1.getSalary());//salary
-			prst.setInt(5, (int)e1.getBalance());//balance
+			//prst.setString(1, "semployee.nextval");//ID
+			prst.setString(1, e1.getName());//name
+			prst.setInt(2,(int)e1.getAge());//age
+			prst.setInt(3,(int)e1.getSalary());//salary
+			prst.setInt(4, (int)e1.getBalance());//balance
 			prst.execute();  
 			
 			con.commit();

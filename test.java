@@ -31,7 +31,7 @@ public class test{
 			
 			con.setAutoCommit(false);
 			
-			String query="insert into employee values (?,?,?,?,?)";
+			String query="insert into employee values (semployee.nextval,?,?,?,?)";
 			//String query="select * from employee";
 			
 			//String query1="update salespeople set comm=? where snum=?";
@@ -64,12 +64,12 @@ create table employee(
   salary int,
   balance int
 );*/
-			
-			prst.setInt(1, 1000);//ID
-			prst.setString(2, "Adam");//name
-			prst.setInt(3,34);//age
-			prst.setInt(4,10000);//salary
-			prst.setInt(5, 3000);//balance
+			//prst.setString(1, "semployee.nextval");
+			//prst.setInt(1, 1000);//ID
+			prst.setString(1, "Adam");//name
+			prst.setInt(2,34);//age
+			prst.setInt(3,10000);//salary
+			prst.setInt(4, 3000);//balance
 			prst.execute();
 			//prst2.addBatch();
 			//prst2.executeUpdate();
